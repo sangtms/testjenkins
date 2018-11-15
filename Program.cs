@@ -10,7 +10,8 @@ namespace TestJenkins
     {
         static void Main(string[] args)
         {
-            Console.Write("Hello World");
+            Console.Write("Hello World 1");
+            Console.Write("Hello World 2");
         }
     }
 }
