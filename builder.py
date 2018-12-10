@@ -229,15 +229,13 @@ class MsBuilder:
 def stop_app_pool(server_name, app_pool_name):
 	stop_apppool_script = r'Invoke-Command -ComputerName %s -ScriptBlock {import-module WebAdministration; Stop-WebAppPool $args[0]} -ArgumentList @("%s")' % (server_name, app_pool_name)
 	print stop_apppool_script
-	p = subprocess.Popen(["powershell.exe", stop_apppool_script], stdout=sys.stdout)
-	p.communicate()
-	if p==1:
-		raise Exception("Have problem when stop_app_pool!")
+	process = subprocess.Popen(["powershell.exe", stop_apppool_script], stdout=sys.stdout)
+	result = process.communicate()[0]
+	print (result)
 
 def start_app_pool(server_name, app_pool_name):
 	start_apppool_script = r'Invoke-Command -ComputerName %s -ScriptBlock {import-module WebAdministration; Start-WebAppPool $args[0]} -ArgumentList @("%s")' % (server_name, app_pool_name)
 	print start_apppool_script
-	p = subprocess.Popen(["powershell.exe", start_apppool_script], stdout=sys.stdout)
-	p.communicate()
-	if p==1:
-		raise Exception("Have problem when start_app_pool!")
+	process = subprocess.Popen(["powershell.exe", start_apppool_script], stdout=sys.stdout)
+	result = process.communicate()[0]
+	print (result)
