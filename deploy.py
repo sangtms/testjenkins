@@ -11,8 +11,6 @@ import logging
 
 SEPERATE_LINE = '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -'
 
-print "sang test sang test"
-
 environment = ""
 if len(sys.argv) > 1:
     environment = sys.argv[1]
@@ -23,12 +21,21 @@ root_folder_path = os.path.dirname(os.path.realpath(__file__))
 print "root_folder_path %s" %root_folder_path
 
 solution_relative_file_path = r"TestJenkins.sln"
-print "Build solution %s" % solution_relative_file_path
+
+project_relative_folder_path = r""
+project_relative_file_path = project_relative_folder_path + r'\\TestJenkins.csproj'
+
+output_absolute_folder_path = root_folder_path + r'\\' + project_relative_folder_path + r'\bin\Release\\'
 
 print SEPERATE_LINE
+print "Build solution %s" % solution_relative_file_path
 
-#build and publish
 dotnet_builder = MsBuilder()
-buildOk = dotnet_builder.build_net_core(solution_relative_file_path)
-if not buildOk:
+if not dotnet_builder.build_net_core(solution_relative_file_path):
+	sys.exit(100)
+
+print SEPERATE_LINE
+print "Publish application"
+
+if not dotnet_builder.deploy_net_core(project_relative_file_path, 'bin\Release\\'):
 	sys.exit(100)
