@@ -26,16 +26,16 @@ lst_deployment_tool_server_paths = [
 SEPERATE_LINE = '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -'
 
 environment = ""
-api_version = "Output"
+apiversion = "Output"
 
 if len(sys.argv) > 1:
     environment = sys.argv[1]
 
 if len(sys.argv) > 2:
-	api_version = sys.argv[2]
+	apiversion = sys.argv[2]
 	
 print "environment %s" %environment
-print "ApiVersion = %s" % api_version
+print "ApiVersion = %s" %apiversion
 
 root_folder_path = os.path.dirname(os.path.realpath(__file__))
 print "root_folder_path %s" %root_folder_path
@@ -45,7 +45,7 @@ solution_relative_file_path = r"TestJenkins.sln"
 project_relative_folder_path = r"NetCore"
 project_relative_file_path = project_relative_folder_path + r'\NetCore.csproj'
 
-output_relative_folder_path =  'bin\Release\\' + api_version
+output_relative_folder_path =  'bin\Release\\' + apiversion
 output_absolute_folder_path = root_folder_path + r'\\' + project_relative_folder_path + r'\\' + output_relative_folder_path
 
 print SEPERATE_LINE
@@ -67,6 +67,6 @@ print "Copy artifact to servers"
 for server_name in lst_deploy_servers:
 	builder.stop_app_pool(server_name, app_pool_name)
 	deploy_root_path = deploy_root_path_template % (server_name, webapi_site_name)
-    dest_folder_path = deploy_root_path + '\\' + api_version
+    dest_folder_path = deploy_root_path + '\\' + apiversion
     print 'Copy output to ' + dest_folder_path
     copy_tree(output_absolute_folder_path, dest_folder_path)
