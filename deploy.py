@@ -9,6 +9,11 @@ from builder import MsBuilder
 import shutil
 from distutils.dir_util import copy_tree
 import logging
+from distutils import log
+
+log.set_verbosity(log.INFO)
+log.set_threshold(log.INFO)
+
 
 deploy_root_path_template = r"\\%s\C$\inetpub\wwwroot\%s"
 webapi_site_name = "webapinew.omnicasa.com"
