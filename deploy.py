@@ -22,8 +22,8 @@ print "root_folder_path %s" %root_folder_path
 
 solution_relative_file_path = r"TestJenkins.sln"
 
-project_relative_folder_path = r"ConsoleApp"
-project_relative_file_path = project_relative_folder_path + r'\ConsoleApp.csproj'
+project_relative_folder_path = r"NetCore"
+project_relative_file_path = project_relative_folder_path + r'\NetCore.csproj'
 
 output_absolute_folder_path = root_folder_path + r'\\' + project_relative_folder_path + r'\bin\Release\\'
 
