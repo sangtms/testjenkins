@@ -5,7 +5,6 @@ import codecs
 import json
 import shutil
 import logging
-import requests
 
 print "sang test sang test"
 
