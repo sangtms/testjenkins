@@ -64,6 +64,6 @@ deploy_root_path_template = r"\\%s\C$\inetpub\wwwroot\%s"
 for server_name in lst_deploy_servers:
 	builder.stop_app_pool(server_name, app_pool_name)
 	deploy_root_path = deploy_root_path_template % (server_name, webapi_site_name)
-    dest_folder_path = deploy_root_path + '\\' + api_version
+    dest_folder_path = deploy_root_path + r'\\' + api_version
     print 'Copy output to ' + dest_folder_path
     copy_tree(output_absolute_folder_path, dest_folder_path)
