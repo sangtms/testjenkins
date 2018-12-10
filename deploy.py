@@ -16,8 +16,8 @@ log.set_threshold(log.INFO)
 
 
 deploy_root_path_template = r"\\%s\C$\inetpub\wwwroot\%s"
-webapi_site_name = "webapinew.omnicasa.com"
-app_pool_name = "DefaultAppPool"
+webapi_site_name = "TestBuild.localhost"
+app_pool_name = "TestBuild"
 
 lst_deploy_servers = [
     'DESKTOP-S5CHI9F'
