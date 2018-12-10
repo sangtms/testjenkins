@@ -39,7 +39,7 @@ if len(sys.argv) > 1:
 if len(sys.argv) > 2:
 	apiversion = sys.argv[2]
 	
-print "environment %s" %environment
+print "Environment = %s" %environment
 print "ApiVersion = %s" %apiversion
 
 root_folder_path = os.path.dirname(os.path.realpath(__file__))
@@ -70,8 +70,12 @@ print SEPERATE_LINE
 print "Copy artifact to servers"
 
 for server_name in lst_deploy_servers:
-	builder.stop_app_pool(server_name, app_pool_name)
-	deploy_root_path = deploy_root_path_template % (server_name, webapi_site_name)
+    print 'Stop application pool'
+    builder.stop_app_pool(server_name, app_pool_name)
+	#stop again for sure
+    builder.stop_app_pool(server_name, app_pool_name)
+	
+    deploy_root_path = deploy_root_path_template % (server_name, webapi_site_name)
     dest_folder_path = deploy_root_path + '\\' + apiversion
     print 'Copy output to ' + dest_folder_path
     copy_tree(output_absolute_folder_path, dest_folder_path)
