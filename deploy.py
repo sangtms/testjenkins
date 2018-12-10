@@ -37,5 +37,5 @@ if not dotnet_builder.build_net_core(solution_relative_file_path):
 print SEPERATE_LINE
 print "Publish application"
 
-if not dotnet_builder.deploy_net_core(project_relative_file_path, 'bin\Release\\'):
+if not dotnet_builder.deploy_net_core(project_relative_file_path, 'bin\Release\aaa\'):
 	sys.exit(100)
