@@ -20,7 +20,7 @@ webapi_site_name = "webapinew.omnicasa.com"
 app_pool_name = "DefaultAppPool"
 
 lst_deploy_servers = [
-    'localhost'
+    'DESKTOP-S5CHI9F'
 ]
 lst_deployment_tool_server_paths = [
     r'\\apiserver1\C$\OmnicasaNET\deployment',
