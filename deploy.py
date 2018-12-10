@@ -10,6 +10,7 @@ import shutil
 from distutils.dir_util import copy_tree
 import logging
 
+deploy_root_path_template = r"\\%s\C$\inetpub\wwwroot\%s"
 webapi_site_name = "webapinew.omnicasa.com"
 app_pool_name = "DefaultAppPool"
 
@@ -60,7 +61,6 @@ if not dotnet_builder.deploy_net_core(project_relative_file_path, output_relativ
 print SEPERATE_LINE
 print "Copy artifact to servers"
 
-deploy_root_path_template = r"\\%s\C$\inetpub\wwwroot\%s"
 for server_name in lst_deploy_servers:
 	builder.stop_app_pool(server_name, app_pool_name)
 	deploy_root_path = deploy_root_path_template % (server_name, webapi_site_name)
