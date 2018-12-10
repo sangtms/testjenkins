@@ -10,6 +10,6 @@ print "sang test sang test"
 
 environment = ""
 if len(sys.argv) > 0:
-    environment = sys.argv[1]
+    environment = sys.argv[0]
 
 print "environment %s" %environment
