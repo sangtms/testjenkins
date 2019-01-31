@@ -74,15 +74,10 @@ class MattermostAPI:
     def channel_update_last_viewed_at(self, channel_id):
         return self.post('/channels/%s/update_last_viewed_at' % (channel_id))
 
-    def create_post(self, user_id, channel_id, message, create_at=int(time.time() * 1000), filenames=[], state="loading"):
-        return self.post('/channels/%s/create' % (channel_id), {
-            'user_id': user_id,
+    def create_post(self, channel_id, message):
+        return self.post('/posts', {
             'channel_id': channel_id,
-            'message': message,
-            'create_at': create_at,
-            'filenames': filenames,
-            'pending_post_id': user_id + ':' + str(create_at),
-            'state': state
+            'message': message
         })
 
     def get_channel_posts(self, channel_id, since):
@@ -235,13 +230,13 @@ class MattermostClient:
         message -- The message being sent.
         """
         c_id = self.channels[channel]["id"]
-        r = self.api.create_post(self.user["id"], c_id, 'blah')
+        r = self.api.create_post(c_id, message)
         if 'status_code' in r.keys():
             if r["status_code"] == 403:
                 logging.error("You need to join the channel first (%s): %s" % (channel, r["message"]))
 
     def channel_msg_new(self, c_id, message):
-        r = self.api.create_post(self.user["id"], c_id, 'blah')
+        r = self.api.create_post(c_id, message)
         if 'status_code' in r.keys():
             if r["status_code"] == 403:
                 logging.error("You need to join the channel first (%s): %s" % (c_id, r["message"]))
