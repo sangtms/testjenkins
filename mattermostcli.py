@@ -130,7 +130,7 @@ class MattermostClient:
                 display_name.
         """
         self.user = self.api.login(name, password)
-        self.update()
+        #self.update()
         return self.user
 
     def join_channel(self, name):
