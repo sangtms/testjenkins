@@ -245,7 +245,7 @@ author = sys.argv[2]
 message = sys.argv[3]
 
 client = MattermostClient("https://mattermost.omnicasa.com/api/v4")
-client.login("Omnicasa","omnicasanotification@omnicasa.com","yIYXQR28WiEf")
+client.login("omnicasanotification","omnicasanotification@omnicasa.com","yIYXQR28WiEf")
 client.update()
 client.channel_msg('Build Notification', message)
 				
