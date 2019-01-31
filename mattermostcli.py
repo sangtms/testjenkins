@@ -33,7 +33,7 @@ class MattermostAPI:
         })
     def login(self, name, email, password):
         """Login to the corresponding (self.url) mattermost instance."""
-        props = { 'name': name, 'email': email, 'password': password }
+        props = { 'login_id': name, 'email': email, 'password': password }
         p = requests.post(self.url + '/users/login', data=json.dumps(props))
         self.token = p.headers["Token"] # Store the token for further requests
         return json.loads(p.text)
