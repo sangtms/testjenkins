@@ -246,6 +246,8 @@ state = sys.argv[1]
 app = sys.argv[2]
 author = sys.argv[3]
 
+print os.environ
+
 client = MattermostClient("https://mattermost.omnicasa.com/api/v4")
 client.login("omnicasanotification","yIYXQR28WiEf")
 client.channel_msg_new('pswnzxeqrt86p8343kcqoctxie', state +' '+ os.environ['JOB_NAME'] +' '+ os.environ['BRANCH_NAME'] +' '+ os.environ['BUILD_DISPLAY_NAME'])
