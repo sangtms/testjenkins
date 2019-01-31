@@ -240,11 +240,11 @@ class MattermostClient:
             if r["status_code"] == 403:
                 logging.error("You need to join the channel first (%s): %s" % (channel, r["message"]))
 
-	def channel_msg_new(self, c_id, message):
+    def channel_msg_new(self, c_id, message):
         r = self.api.create_post(self.user["id"], c_id, 'blah')
         if 'status_code' in r.keys():
             if r["status_code"] == 403:
-                logging.error("You need to join the channel first (%s): %s" % (channel, r["message"]))
+                logging.error("You need to join the channel first (%s): %s" % (c_id, r["message"]))
 	
 app = sys.argv[1]
 author = sys.argv[2]
