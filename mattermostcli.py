@@ -241,13 +241,13 @@ class MattermostClient:
             if r["status_code"] == 403:
                 logging.error("You need to join the channel first (%s): %s" % (c_id, r["message"]))
 	
-app = sys.argv[1]
-author = sys.argv[2]
-message = sys.argv[3]
+state = sys.argv[1]
+app = sys.argv[2]
+author = sys.argv[3]
 
 client = MattermostClient("https://mattermost.omnicasa.com/api/v4")
 client.login("omnicasanotification","yIYXQR28WiEf")
-client.channel_msg_new('pswnzxeqrt86p8343kcqoctxie', message)
+client.channel_msg_new('pswnzxeqrt86p8343kcqoctxie', state + app + author)
 				
 #m = MattermostClient("http://localhost:8065/api/v1")
 #m.signup_with_team('gzwzj9yn5pg65yfb55seqnh1zo', 'c@c.com', 'myuser3', 'mypassword')
