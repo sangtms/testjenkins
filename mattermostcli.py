@@ -5,7 +5,6 @@ import time
 import json
 import requests
 
-
 class MattermostAPI:
     def __init__(self, url):
         self.url = url
@@ -239,11 +238,20 @@ class MattermostClient:
             if r["status_code"] == 403:
                 logging.error("You need to join the channel first (%s): %s" % (channel, r["message"]))
 
-m = MattermostClient("http://localhost:8065/api/v1")
+app = sys.argv[1]
+author = sys.argv[2]
+message = sys.argv[3]
+
+client = MattermostClient("https://mattermost.omnicasa.com/api/v4")
+client.login("Omnicasa","omnicasanotification","yIYXQR28WiEf")
+client.update()
+client.channel_msg('Build Notification', message)
+				
+#m = MattermostClient("http://localhost:8065/api/v1")
 #m.signup_with_team('gzwzj9yn5pg65yfb55seqnh1zo', 'c@c.com', 'myuser3', 'mypassword')
-m.login("helloteam", "c@c.com", "mypassword")
-print(json.dumps(m.mentions, indent=4))
-m.mentions
+#m.login("helloteam", "c@c.com", "mypassword")
+#print(json.dumps(m.mentions, indent=4))
+#m.mentions
 
 #print(json.dumps(m.get_mentions(), indent=4))
 #m.leave_channel('hello')
