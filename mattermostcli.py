@@ -31,9 +31,9 @@ class MattermostAPI:
             'password': password,
             'allow_marketing': allow_marketing
         })
-    def login(self, name, email, password):
+    def login(self, name, password):
         """Login to the corresponding (self.url) mattermost instance."""
-        props = { 'login_id': name, 'email': email, 'password': password }
+        props = { 'login_id': name, 'password': password }
         p = requests.post(self.url + '/users/login', data=json.dumps(props))
         self.token = p.headers["Token"] # Store the token for further requests
         return json.loads(p.text)
@@ -119,7 +119,7 @@ class MattermostClient:
         """
         self.api.signup_with_team(team_id, email, username, password, True)
 
-    def login(self, team, email, password):
+    def login(self, name, password):
         """Login to the Mattermost instance.
         Sends a request that returns a token which is automatically stored
         within our MattermostAPI object for convenience. It will also
@@ -129,7 +129,7 @@ class MattermostClient:
         name -- May be the channel_id, channel url-name or channel
                 display_name.
         """
-        self.user = self.api.login(team, email, password)
+        self.user = self.api.login(name, password)
         self.update()
         return self.user
 
@@ -221,7 +221,7 @@ class MattermostClient:
             self.channels[channel["id"]] = channel
             self.channels[channel["name"]] = channel
             self.channels[channel["display_name"]] = channel
-
+			
     def channel_msg(self, channel, message):
         """Send a message to a specific channel.
         There is no big mistery here, a simple message to a channel. It should
@@ -240,13 +240,18 @@ class MattermostClient:
             if r["status_code"] == 403:
                 logging.error("You need to join the channel first (%s): %s" % (channel, r["message"]))
 
+	def channel_msg_new(self, c_id, message):
+        r = self.api.create_post(self.user["id"], c_id, 'blah')
+        if 'status_code' in r.keys():
+            if r["status_code"] == 403:
+                logging.error("You need to join the channel first (%s): %s" % (channel, r["message"]))
+	
 app = sys.argv[1]
 author = sys.argv[2]
 message = sys.argv[3]
 
 client = MattermostClient("https://mattermost.omnicasa.com/api/v4")
-client.login("omnicasanotification","omnicasanotification@omnicasa.com","yIYXQR28WiEf")
-client.update()
+client.login("omnicasanotification","yIYXQR28WiEf")
 client.channel_msg('Build Notification', message)
 				
 #m = MattermostClient("http://localhost:8065/api/v1")
