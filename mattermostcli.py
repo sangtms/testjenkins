@@ -247,7 +247,7 @@ author = sys.argv[3]
 
 client = MattermostClient("https://mattermost.omnicasa.com/api/v4")
 client.login("omnicasanotification","yIYXQR28WiEf")
-client.channel_msg_new('pswnzxeqrt86p8343kcqoctxie', state + env["JOB_BASE_NAME"] + env["BUILD_USER"])
+client.channel_msg_new('pswnzxeqrt86p8343kcqoctxie', state + app + author)
 				
 #m = MattermostClient("http://localhost:8065/api/v1")
 #m.signup_with_team('gzwzj9yn5pg65yfb55seqnh1zo', 'c@c.com', 'myuser3', 'mypassword')
