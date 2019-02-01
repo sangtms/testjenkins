@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-     COMMIT_MESSAGE = bat(returnStdout: true, script: 'stdout git show -s --format=format:"*%s*  _by %an_" HEAD').trim()
+     COMMIT_MESSAGE = bat(returnStdout: true, script: 'returnStdout git show -s --format=format:"*%s*  _by %an_" HEAD').trim()
    }
     agent any
     stages {
