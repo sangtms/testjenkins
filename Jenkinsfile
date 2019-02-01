@@ -18,8 +18,8 @@ pipeline {
 			bat 'python mattermost.py ' + message
         }
         failure {
-			message = '[FAILED] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
-			def bat 'python mattermost.py ' + message
+			def message = '[FAILED] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+			bat 'python mattermost.py ' + message
         }
     }
 }
