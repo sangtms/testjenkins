@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {			
-                bat 'python mattermost.py ' + '[STARTED] ' + env.BRANCH_NAME + ' $JOB_NAME #$BUILD_NUMBER ($HIPCHAT_CHANGES_OR_CAUSE) ($COMMIT_MESSAGE) (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+				message = '[STARTED] ' + env.BRANCH_NAME + ' $JOB_NAME #$BUILD_NUMBER ($HIPCHAT_CHANGES_OR_CAUSE) ($COMMIT_MESSAGE) (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+                bat 'python -u mattermost.py ' + message
 				bat 'python -u deploy.py ' + env.BRANCH_NAME
             }
         }
@@ -11,13 +12,14 @@ pipeline {
     post {
         always {
             echo 'Just for test (SangTM)'
-			echo 'Build'
         }
         success {
-			bat 'python mattermost.py ' + '[SUCCESS] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+			message = '[SUCCESS] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+			bat 'python mattermost.py ' + message
         }
         failure {
-			bat 'python mattermost.py ' + '[FAILED] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+			message = '[FAILED] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+			bat 'python mattermost.py ' + message
         }
     }
 }
