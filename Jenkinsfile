@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {			
-				echo "git log -n 1 --pretty=format:'%h'"
+				echo "export COMMIT_MESSAGE=git log -n 1 --pretty=format:'%h'"
 
                 //bat 'python mattermost.py [STARTED] ' + env.BRANCH_NAME + ' ${JOB_NAME} #${BUILD_NUMBER} (${HIPCHAT_CHANGES_OR_CAUSE}) (${COMMIT_MESSAGE}) (<a href="${BLUE_OCEAN_URL}">View detail</a>)'
 				bat 'python mattermost.py [STARTED] ' + env.BRANCH_NAME + ' ' + env.JOB_NAME + ' #' + env.BUILD_NUMBER + ' (' + env.HIPCHAT_CHANGES_OR_CAUSE+ ') (' + env.GIT_COMMIT + ') [View detail](' + env.BLUE_OCEAN_URL + ')'
