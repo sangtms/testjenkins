@@ -4,7 +4,8 @@ pipeline {
         stage('Build') {
             steps {			
 			//echo bat(returnStdout: true, script: 'set')
-				echo bat(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+				$COMMIT_MESSAGE = bat(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+				echo $COMMIT_MESSAGE;
 				
                 //bat 'python mattermost.py [STARTED] ' + env.BRANCH_NAME + ' ${JOB_NAME} #${BUILD_NUMBER} (${HIPCHAT_CHANGES_OR_CAUSE}) (${COMMIT_MESSAGE}) (<a href="${BLUE_OCEAN_URL}">View detail</a>)'
 				bat 'python mattermost.py [STARTED] ' + env.BRANCH_NAME + ' ' + env.JOB_NAME + ' #' + env.BUILD_NUMBER + ' (' + env.HIPCHAT_CHANGES_OR_CAUSE+ ') (' + env.GIT_COMMIT + ') [View detail](' + env.BLUE_OCEAN_URL + ')'
