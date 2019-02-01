@@ -11,6 +11,7 @@ pipeline {
     post {
         always {
             echo 'Just for test (SangTM)'
+			echo 'Build'
         }
         success {
 			bat 'python mattermost.py ' + '[SUCCESS] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
