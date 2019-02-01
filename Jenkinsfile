@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-     COMMIT_MESSAGE = bat(returnStdout: true, script: 'git log -1 --pretty=%B').trim()
+     COMMIT_MESSAGE = bat(script: "@git log -n 1 --pretty=format:'%%s'", returnStdout: true).trim().replaceAll("'","")
    }
     agent any
     stages {
