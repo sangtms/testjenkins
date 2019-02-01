@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-     COMMIT_MESSAGE = bat(returnStdout: true, script: "git log --format=oneline -n 1 $CIRCLE_SHA1").trim()
+     COMMIT_MESSAGE = bat(returnStdout: true, script: "git log --oneline -1 ${env.GIT_COMMIT}").trim()
    }
     agent any
     stages {
