@@ -2,9 +2,9 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            steps {
-                hipchatSend color: 'YELLOW', credentialId: '54240709b1209a59b50b344d707ce4', message: '[STARTED] ' + env.BRANCH_NAME + ' $JOB_NAME #$BUILD_NUMBER ($HIPCHAT_CHANGES_OR_CAUSE) ($COMMIT_MESSAGE) (<a href="$BLUE_OCEAN_URL">View detail</a>)'
-                bat 'python -u deploy.py ' + env.BRANCH_NAME
+            steps {			
+                bat 'python mattermost.py ' + '[STARTED] ' + env.BRANCH_NAME + ' $JOB_NAME #$BUILD_NUMBER ($HIPCHAT_CHANGES_OR_CAUSE) ($COMMIT_MESSAGE) (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+				bat 'python -u deploy.py ' + env.BRANCH_NAME
             }
         }
     }
@@ -13,10 +13,10 @@ pipeline {
             echo 'Just for test (SangTM)'
         }
         success {
-            hipchatSend color: 'GREEN', credentialId: '54240709b1209a59b50b344d707ce4', message: '[SUCCESS] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+			bat 'python mattermost.py ' + '[SUCCESS] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
         }
         failure {
-            hipchatSend color: 'RED', credentialId: '54240709b1209a59b50b344d707ce4', message: '[FAILED] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
+			bat 'python mattermost.py ' + '[FAILED] $JOB_NAME #$BUILD_NUMBER after $BUILD_DURATION (<a href="$BLUE_OCEAN_URL">View detail</a>)'
         }
     }
 }
