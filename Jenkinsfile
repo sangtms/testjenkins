@@ -13,10 +13,10 @@ pipeline {
             echo 'Just for test (SangTM)'
         }
         success {
-			bat 'python mattermost.py [SUCCESS] ${JOB_NAME} #${BUILD_NUMBER} after ${BUILD_DURATION} (<a href="${BLUE_OCEAN_URL}">View detail</a>)'
+			bat 'python -u mattermost.py [SUCCESS] ${JOB_NAME} #${BUILD_NUMBER} after ${BUILD_DURATION} (<a href="${BLUE_OCEAN_URL}">View detail</a>)'
         }
         failure {
-			bat 'python mattermost.py [FAILED] ${JOB_NAME} #${BUILD_NUMBER} after ${BUILD_DURATION} (<a href="${BLUE_OCEAN_URL}">View detail</a>)'
+			bat 'python -u mattermost.py [FAILED] ${JOB_NAME} #${BUILD_NUMBER} after ${BUILD_DURATION} (<a href="${BLUE_OCEAN_URL}">View detail</a>)'
         }
     }
 }
