@@ -242,21 +242,13 @@ class MattermostClient:
             if r["status_code"] == 403:
                 logging.error("You need to join the channel first (%s): %s" % (c_id, r["message"]))
 	
-state = sys.argv[1]
-app = sys.argv[2]
-author = sys.argv[3]
 
 print os.environ
 
+msg = ' '.join(sys.argv[1:])
+
 client = MattermostClient("https://mattermost.omnicasa.com/api/v4")
 client.login("omnicasanotification","yIYXQR28WiEf")
-
-msg = state +' '+ os.environ['GIT_BRANCH'] +' '+ os.environ['JOB_NAME'] +' '+ os.environ['BUILD_DISPLAY_NAME']
-
-if os.environ.get('GIT_COMMITTER_NAME')=='True':
-	msg = msg + ' (started by changes from ' + os.environ.get('GIT_COMMITTER_NAME') + ' (' + os.environ.get('GIT_COMMIT') + '))'	
-else:
-	msg = msg + ' (started by ' + os.environ.get('USERNAME') + ')'
 
 client.channel_msg_new('pswnzxeqrt86p8343kcqoctxie', msg)
 
