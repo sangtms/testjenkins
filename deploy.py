@@ -38,6 +38,8 @@ if len(sys.argv) > 1:
 
 if len(sys.argv) > 2:
 	apiversion = sys.argv[2]
+
+print "I'm back"
 	
 print "Environment = %s" %environment
 print "ApiVersion = %s" %apiversion
